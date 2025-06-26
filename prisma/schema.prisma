@@ -12,15 +12,100 @@ datasource db {
 }
 
 model Professor {
-    id String @id @default(uuid())
-    name String
-    email String?
-    matricula String @unique
+  id        String      @id @default(uuid())
+  name      String
+  email     String?
+  matricula String      @unique
+  disciplinas Disciplina[] 
+  turmas     Turma[] 
+  avaliacoes Avaliacao[]
 }
 
 model Aluno {
-    id String @id @default(uuid())
-    name String
-    email String?
-    matricula String @unique
+  id        String   @id @default(uuid())
+  name      String
+  email     String?
+  matricula String   @unique
+  turmas    TurmaAluno[]
+  avaliacoes AvaliacaoAluno[]
+}
+
+model Disciplina {
+  id         String   @id @default(uuid())
+  nome       String
+  codigo     String   @unique
+  professor  Professor @relation(fields: [professorId], references: [id])
+  professorId String
+  turmas     TurmaDisciplina[]
+  avaliacoes Avaliacao[]
+}
+
+model Turma {
+  id         String   @id @default(uuid())
+  nomeTurma  String
+  codigo     String   @unique
+  professor  Professor @relation(fields: [professorId], references: [id])
+  professorId String
+  alunos     TurmaAluno[]
+  disciplinas TurmaDisciplina[]
+}
+
+model TurmaAluno {
+  turmaId String
+  alunoId String
+  turma   Turma  @relation(fields: [turmaId], references: [id])
+  aluno   Aluno  @relation(fields: [alunoId], references: [id])
+
+  @@id([turmaId, alunoId])
+}
+
+model TurmaDisciplina {
+  turmaId      String
+  disciplinaId String
+  turma        Turma      @relation(fields: [turmaId], references: [id])
+  disciplina   Disciplina @relation(fields: [disciplinaId], references: [id])
+
+  @@id([turmaId, disciplinaId])
+}
+
+enum TipoAvaliacao {
+  PROVA
+  TRABALHO
+}
+
+enum TipoProva {
+  FINAL
+  PARCIAL
+  RECUPERACAO
+}
+
+enum TipoTrabalho {
+  PROJETO
+  PESQUISA
+}
+
+model Avaliacao {
+  id            String        @id @default(uuid())
+  codigo        String        @unique
+  nome          String
+  notaMaxima    Float
+  tipo          TipoAvaliacao
+  tipoProva     TipoProva?    
+  tipoTrabalho  TipoTrabalho?  
+  professor     Professor    @relation(fields: [professorId], references: [id])
+  professorId   String
+  disciplina    Disciplina   @relation(fields: [disciplinaId], references: [id])
+  disciplinaId  String
+  avaliacoesAluno AvaliacaoAluno[]
+}
+
+model AvaliacaoAluno {
+  id           String     @id @default(uuid())
+  aluno        Aluno      @relation(fields: [alunoId], references: [id])
+  alunoId      String
+  avaliacao    Avaliacao  @relation(fields: [avaliacaoId], references: [id])
+  avaliacaoId  String
+  notaObtida   Float
+
+  @@unique([alunoId, avaliacaoId])
 }
