@@ -11,19 +11,19 @@
 - **web → controllers → services (use cases) → models (entitites)**
     - De forma que cada camada mais interna não tem acesso à camada externa.
 
-## Models
+## MODELS
 
 - A criação de models foi feita com o PrismaDB para facilitar a interação com o banco de dados.
 - No Prisma e no SQL não existe o conceito “formal” de herança, por isso cada model é uma **entidade separada**
 
 `prisma/schema.prisma`
 
-## Services
+## SERVICES
 
 - Nas classes de service, você vai encontrar métodos como esse:
 - Apesar do Prisma ser um ORM, nesse projeto foi utilizado SQL puro para fins de estudo.
 
-## Controllers
+## CONTROLLERS
 
 - Os controllers expõem rotas http para se comunicar com a API
 
