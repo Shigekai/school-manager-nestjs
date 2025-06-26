@@ -1,8 +1,10 @@
-# School Manager NestJS
+# 📘 School Manager API – NestJS
+
+Este é um projeto de API REST para gestão escolar, desenvolvido com **NestJS** e **Prisma ORM**, seguindo os princípios da **Clean Architecture**.
 
 ## ARQUITETURA
 
-![Descrição da imagem](https://miro.medium.com/v2/resize:fit:800/1*0R0r00uF1RyRFxkxo3HVDg.png)
+![Diagrama da Arquitetura](https://miro.medium.com/v2/resize:fit:800/1*0R0r00uF1RyRFxkxo3HVDg.png)
 
 - O NestJS facilita o uso de **clean architeture**, que foi utilizado nesse projeto da seguinte forma:
 - **web → controllers → services (use cases) → models (entitites)**
