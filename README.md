@@ -5,7 +5,7 @@
 
 ## ARQUITETURA
 
-[Diagrama da Arquitetura](https://i.ibb.co/fYcBdGZK/Design-sem-nome.png)
+![Diagrama da Arquitetura](https://i.ibb.co/fYcBdGZK/Design-sem-nome.png)
 
 - O NestJS facilita o uso de **clean architeture**, que foi utilizado nesse projeto da seguinte forma:
 - **web → controllers → services (use cases) → models (entitites)**
